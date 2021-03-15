@@ -2,27 +2,58 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tab 1</ion-title>
+        <ion-title>Alert</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Tab 1</ion-title>
+          <ion-title size="large">Alert</ion-title>
         </ion-toolbar>
       </ion-header>
-    
-      <ExploreContainer name="Tab 1 page" />
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button @click="presentAlert" expand="full"
+              >Show Alert</ion-button
+            >
+          </ion-col>
+      </ion-row>
+             </ion-grid>
     </ion-content>
   </ion-page>
 </template>
 
-<script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+<script>
+import { 
+  IonPage, 
+  IonHeader, 
+  IonToolbar, 
+  IonTitle, 
+  IonContent, 
+  IonButton, 
+  alertController, 
+  } from '@ionic/vue';
 
-export default  {
+export default {
   name: 'Tab1',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
-}
-</script>
+  components: { 
+  IonHeader, 
+  IonToolbar, 
+  IonTitle, 
+  IonContent, 
+  IonPage, 
+  IonButton, 
+  }, 
+  methods: {
+  async presentAlert() {
+      const alert = await alertController.create({
+        header: 'Use this lightsaber?',
+        message: 'Do you agree to use this lightsaber to do good across the galaxy?',
+        buttons: ['DISAGREE','AGREE']
+      });
+      return alert.present();
+  },
+    }
+};
+  </script>
